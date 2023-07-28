@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+
+from os import geteuid
+from colorama import Fore
+from modules.argumentparse import argsumentparse
+from modules.arp_spoof import spoof
+from modules.interface_settings import change_mac, change_interface_name, get_all_interface_and_mac
+from modules.net_block import net_block
+from modules.net_cut import net_cut
+from modules.net_scan import scan
+from modules.packet_sniff import sniff
+
+def info():
+    pass
+
+
+def main():
+    args = argsumentparse()
+    if not any([args.scan, args.retry, args.interface, args.new_mac, args.new_name, args.block, args.target, args.source, args.spoof, args.sniff]):
+        info()
+
+    elif args.scan and not any([args.block, args.interface, args.new_mac, args.new_name, args.spoof, args.target, args.source, args.sniff]):
+        
+        if args.retry and args.retry.isnumeric():
+            return scan(args.scan, int(args.retry))
+        
+        elif not args.retry:
+            return scan(args.scan)
+    
+    elif args.block and not any([args.scan, args.retry, args.interface, args.new_mac, args.new_name, args.spoof, args.target, args.source, args.sniff]):
+        return net_block(args.block)
+    
+    elif args.interface and not any([args.block, args.scan, args.retry, args.spoof, args.target, args.source, args.sniff]):
+        
+        if args.interface == '&':
+            return get_all_interface_and_mac(comment=True)
+        
+        else:
+            
+            if args.new_mac and not args.new_name:
+                return change_mac(args.interface, args.new_mac)
+            
+            elif args.new_name and not args.new_mac:
+                return change_interface_name(args.interface, args.new_name)
+    
+    elif args.spoof and not any([args.scan, args.retry, args.interface, args.new_mac, args.new_name, args.block, args.target, args.source, args.sniff]):
+        return spoof(args.spoof)
+    
+    elif args.source and not any([args.scan, args.retry, args.interface, args.new_mac, args.new_name, args.block, args.spoof, args.sniff]):
+        
+        if args.target:
+            return net_cut(args.source, args.target)
+        else: 
+            return net_cut(args.source)
+    
+    elif args.sniff and not any([args.scan, args.retry, args.interface, args.new_mac, args.new_name, args.block, args.target, args.source, args.spoof]):
+        return sniff()
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    if geteuid(): print(Fore.RED + '\n[WARNING] Root privileges are nessesary\n' + Fore.RESET)
+    else: main()

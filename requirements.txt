@@ -1,0 +1,4 @@
+colorama
+argparse
+scapy
+git+https://github.com/oremanj/python-netfilterqueue.git
