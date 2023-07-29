@@ -1,6 +1,5 @@
 # NetworkScanner
 
-![NetworkScanner](project_image.png)
 
 NetworkScanner is a powerful tool for scanning and analyzing the local network. This application provides various features for monitoring and controlling network activity, as well as assisting in learning network security principles and analyzing network interactions.
 
