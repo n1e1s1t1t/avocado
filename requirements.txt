@@ -1,4 +1,4 @@
 colorama
 argparse
 scapy
-git+https://github.com/oremanj/python-netfilterqueue.git
+scapy_http

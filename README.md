@@ -1,7 +1,5 @@
 # NetworkScanner
 
-
-
 NetworkScanner is a powerful tool for scanning and analyzing the local network. This application provides various features for monitoring and controlling network activity, as well as assisting in learning network security principles and analyzing network interactions.
 
 ## Key Features
@@ -29,23 +27,23 @@ NetworkScanner is a powerful tool for scanning and analyzing the local network. 
 2. Download this repository to your computer.
 
 3. Install all the necessary dependencies using the following command:
-   
+   ```
    pip install -r requirements.txt
-   
-
-4. Run the program using the command:
-   
-   ./avokado -h
-   
-
-5. Follow the instructions in the program interface to utilize its various features.
+   ```
+4. On Debian or Ubuntu, install these files with:
+   ```
+   apt-get install build-essential python3-dev libnetfilter-queue-dev
+   ```
+6. Run the program using the command:
+   ```
+   sudo ./avokado -h
+   ```
+6. Follow the instructions in the program interface to utilize its various features.
 
 ## License
 
-This project is provided for educational purposes and network research only. The author is not responsible for any misuse of the program or actions of others who use this software. Please use this project responsibly and in compliance with the laws of your country.
-
-Important: It is strictly prohibited to modify or add your own code to this program without the author's permission. If you encounter any issues, have suggestions, or questions, feel free to reach me on Telegram: [t.me/n1e1s1t1t](https://t.me/n1e1s1t1t). I welcome feedback and I'm here to assist you with the project.
+It is strongly not recommended to change the program code in order to avoid unexpected errors if you are not sure of your capabilities. The author is not responsible for any misuse of the program or actions of others who use this software. Please use this project responsibly and in compliance with the laws of your country. If you encounter any issues, have suggestions, or questions, feel free to reach me on Telegram: [t.me/n1e1s1t1t](https://t.me/n1e1s1t1t). I welcome feedback and I'm here to assist you with the project.
 
 ---
 
-Disclaimer: This project is provided for educational and networking research purposes only. The author is not responsible for any misuse of the program or actions of others who use this software. Please use this project responsibly and in compliance with the laws of your country.
+Disclaimer: This project is provided for educational and networking research purposes only. The author is not responsible for any misuse of the program or actions of others who use this software. Please use this project responsibly and in compliance with the laws of your country.d in compliance with the laws of your country.

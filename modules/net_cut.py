@@ -1,4 +1,4 @@
-from netfilterqueue import NetfilterQueue
+from modules.netfilterqueue import NetfilterQueue
 import scapy.all as scapy
 from subprocess import call
 def set_load(packet):

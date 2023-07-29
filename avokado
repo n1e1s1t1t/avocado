@@ -11,7 +11,7 @@ from modules.net_scan import scan
 from modules.packet_sniff import sniff
 
 def info():
-    pass
+    print(Fore.LIGHTYELLOW_EX + '\nPlease, enter -h or --help to get more info' + Fore.RESET)
 
 
 def main():
@@ -20,16 +20,22 @@ def main():
         info()
 
     elif args.scan and not any([args.block, args.interface, args.new_mac, args.new_name, args.spoof, args.target, args.source, args.sniff]):
-        
+        #Scanning 
         if args.retry and args.retry.isnumeric():
             return scan(args.scan, int(args.retry))
         
         elif not args.retry:
             return scan(args.scan)
     
-    elif args.block and not any([args.scan, args.retry, args.interface, args.new_mac, args.new_name, args.spoof, args.target, args.source, args.sniff]):
-        return net_block(args.block)
-    
+    #Blocking
+    elif args.block and not any([args.scan, args.interface, args.new_mac, args.new_name, args.spoof, args.target, args.source, args.sniff]):
+        if args.retry and args.retry.isnumeric():
+            return net_block(args.block, int(args.retry))
+        
+        elif not args.retry:
+            return net_block(args.block)
+
+
     elif args.interface and not any([args.block, args.scan, args.retry, args.spoof, args.target, args.source, args.sniff]):
         
         if args.interface == '&':

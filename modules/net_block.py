@@ -51,6 +51,7 @@ def restored_network(ip_dict, spoof_ip=check_default_ip_route()):
                     sleep(0.1)
                     print(Fore.LIGHTYELLOW_EX + f'{target_ip} ' + Fore.RESET, end='')
                     break
+    call(['iptables','--flush'])
 
 
 def pause(ip_dict):
@@ -149,16 +150,14 @@ def spoof(ip_dict, spoof_ip=check_default_ip_route(), fake_mac=True):
    
     except:
         pass
-def net_block(ip):
+def net_block(ip,retry=3):
     try:
-        if ip_check(ip):
-            call(['iptables','--flush'])
-            call('clear')
-            if ip.endswith('/24'):
-                ip = scan(ip)
-            else: ip = scan(ip,retry=100)
-    
-            return spoof(ip)
+        call(['iptables','--flush'])
+        if ip.endswith('/24'):
+            ip = scan(ip)
+        else: ip = scan(ip,retry=retry)
+
+        return spoof(ip)
     except: pass
 
 

@@ -12,8 +12,8 @@ def check_default_ip_route():
 
 
 def get_current_mac(interface) -> str:
-    ifconfig_result = subprocess.check_output(['ifconfig', interface])
-    mac_address = re.search(rb'\w\w:\w\w:\w\w:\w\w:\w\w:\w\w', ifconfig_result).group(0).decode()
+    ip_result = subprocess.check_output(['ip', 'link', 'show', interface])
+    mac_address = re.search(rb'\w\w:\w\w:\w\w:\w\w:\w\w:\w\w', ip_result).group(0).decode()
     return mac_address
 
 
@@ -46,10 +46,10 @@ def change_mac(interface, new_mac) -> None:
     elif interfaces[interface] == '00:00:00:00:00:00':
         print(Fore.LIGHTYELLOW_EX + '[INFO] Cannot change MAC address of this interface' + Fore.RESET)
     else:
-        subprocess.call(['ifconfig', interface, 'down'])
+        subprocess.call(['ip', 'link', 'set', interface, 'down'])
     
         try:
-            subprocess.check_output(['ifconfig', interface, 'hw', 'ether', new_mac], stderr=subprocess.DEVNULL) 
+            subprocess.check_output(['ip', 'link', 'set', 'dev', interface, 'address', new_mac], stderr=subprocess.DEVNULL) 
         except KeyboardInterrupt: pass    
         except:
             y = 'y'
@@ -60,18 +60,18 @@ def change_mac(interface, new_mac) -> None:
             old_address = get_current_mac(interface)
             if y == 'y':
                 while get_current_mac(interface) == old_address:
-                    subprocess.call(['ifconfig', interface, 'hw', 'ether', random_mac()], stderr=subprocess.DEVNULL) 
+                    subprocess.call(['ip', 'link', 'set', 'dev', interface, 'address', random_mac()], stderr=subprocess.DEVNULL) 
                 print(Fore.GREEN + f'\n[+] MAC adress was successfully changed to {get_current_mac(interface)}\n' + Fore.RESET)
             else: print(Fore.LIGHTYELLOW_EX + f'\n[INFO] MAC address wasn`t changed\n' + Fore.RESET)
-        finally: subprocess.call(['ifconfig', interface, 'up'])
+        finally: subprocess.call(['ip', 'link', 'set', interface, 'up'])
 
 
 def change_interface_name(interface, new_name) -> None:
     try:
         if interface in get_all_interface_and_mac():
-            subprocess.call(['ifconfig', interface, 'down'], stderr=subprocess.DEVNULL)
-            subprocess.call(['ifconfig', interface, 'name', new_name], stderr=subprocess.DEVNULL)
-            subprocess.call(['ifconfig', new_name, 'up'], stderr=subprocess.DEVNULL)
+            subprocess.call(['ip', 'link', 'set', interface, 'down'], stderr=subprocess.DEVNULL)
+            subprocess.call(['ip', 'link', 'set', 'dev', interface, 'name', new_name], stderr=subprocess.DEVNULL)
+            subprocess.call(['ip', 'link', 'set', interface, 'up'], stderr=subprocess.DEVNULL)
             print(Fore.GREEN + f'\n[+] Interface {interface} has been renamed to {new_name}' + Fore.RESET)
         else: print(Fore.LIGHTYELLOW_EX + '[INFO] Incorrect interface' + Fore.RESET)
     except KeyboardInterrupt: pass    

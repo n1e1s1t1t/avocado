@@ -3,7 +3,7 @@ import argparse
 
 def argsumentparse():
     parser = argparse.ArgumentParser(description='Version - 0.1', usage='%(prog)s [-h] | [-s SCAN [-r RETRY]] | [-B BLOCK] | [-I [INTERFACE] [-nm [NEW_MAC] | -nn NEW_NAME]] | [-p SPOOF] | [-cs SOURCE [-ct TARGET]] | [-m [SNIFF]]')
-    parser.add_argument('-s', '--scan', dest='scan', help='IP address for scanning')
+    parser.add_argument('-s', '--scan', nargs='?', const='&', dest='scan', help='IP address for scanning')
     parser.add_argument('-r', '--retry', dest='retry', help='Maximum packets sent to IP address')
 
 
