@@ -2,3 +2,4 @@ colorama
 argparse
 scapy
 scapy_http
+request 
