@@ -11,7 +11,7 @@ from modules.net_scan import scan
 from modules.packet_sniff import sniff
 
 def info():
-    print(Fore.LIGHTYELLOW_EX + '\nPlease, enter -h or --help to get more info' + Fore.RESET)
+    print(Fore.LIGHTYELLOW_EX + '\nPlease, enter -h or --help to get more info\n' + Fore.RESET)
 
 
 def main():

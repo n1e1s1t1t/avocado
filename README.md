@@ -36,7 +36,7 @@ NetworkScanner is a powerful tool for scanning and analyzing the local network. 
    ```
 6. Run the program using the command:
    ```
-   sudo ./avokado -h
+   sudo ./avocado -h
    ```
 6. Follow the instructions in the program interface to utilize its various features.
 
